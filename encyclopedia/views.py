@@ -2,8 +2,9 @@ from django.shortcuts import render
 
 from . import util
 
-import markdown2
+from markdown2 import Markdown
 
+markdowner = Markdown()
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -12,5 +13,5 @@ def index(request):
 
 def entry(request, title):
     return render(request, "encyclopedia/entries.html", {
-        "title": markdown2.markdown(util.get_entry(f"{title}"))
+        "title": markdowner.convert(util.get_entry(f"{title}"))
     })
