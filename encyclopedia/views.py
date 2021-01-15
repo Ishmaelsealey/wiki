@@ -14,3 +14,6 @@ def entry(request, title):
     return render(request, "encyclopedia/entries.html", {
         "title": markdowner.convert(util.get_entry(f"{title}"))
     })
+
+def new(request):
+    return render(request, "encyclopedia/new.html")
