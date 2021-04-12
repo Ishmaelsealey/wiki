@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block body %}
-
-    <h1> Hello World </h1>
+<!-- find a way to make the action use the util.save_entry function-->
+    <form action="{% url 'encyclopedia:new' %}" method="post">
+        {% csrf_token %}
+        <input type="text", name="entry">
+        <input type="submit">
+    </form>
 
 {% endblock %}
