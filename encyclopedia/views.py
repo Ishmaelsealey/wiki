@@ -24,7 +24,7 @@ def entry(request, title):  # gets the entry
 
 class NewEntryForm(forms.Form): # a form to create a new entry
     title = forms.CharField(label = "Title")
-    entry = forms.CharField(label = "New Entry")
+    entry = forms.CharField(label = "New Entry") # change this to a textarea
 
 def new(request):
     if request.method == "POST":
