@@ -5,31 +5,34 @@ from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
-def index(request):
+def index(request): # Returns a list of entries
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
-    })
+    })  
 
-def entry(request, title):
+def entry(request, title):  # gets the entry
     markdowner = Markdown()
     return render(request, "encyclopedia/entries.html", {
         "title": markdowner.convert(util.get_entry(f"{title}"))
     })
 
-class NewEntryForm(forms.Form):
-    entry = forms.CharField(label="New Entry")
+class NewEntryForm(forms.Form): # a form to create a new entry
+    title = forms.CharField(label = "Title")
+    entry = forms.CharField(label = "New Entry")
 
 def new(request):
     if request.method == "POST":
         form = NewEntryForm(request.POST)
         if form.is_valid():
+            title = form.cleaned_data["title"]
             entry = form.cleaned_data["entry"]
-            entry.append(entry)
+            util.save_entry(f"{title}", f"{entry}")
             return HttpResponseRedirect(reverse("encyclopedia:index"))
         else:
             return render(request, "encyclopedia/new.html", {
                 "form": form
             })
+            ##
     return render(request, "encyclopedia/new.html", {
         "form": NewEntryForm()
     })
