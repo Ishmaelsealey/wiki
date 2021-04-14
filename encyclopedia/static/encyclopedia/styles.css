@@ -28,7 +28,7 @@ textarea {
 }
 
 .sidebar {
-    background-color: #222;
+    background-color: rgb(126, 126, 126);
     height: 100vh;
     padding: 20px;
 }
