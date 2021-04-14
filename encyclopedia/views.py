@@ -4,6 +4,7 @@ from markdown2 import Markdown
 from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 
 def index(request): # Returns a list of entries
     return render(request, "encyclopedia/index.html", {
@@ -12,6 +13,11 @@ def index(request): # Returns a list of entries
 
 def entry(request, title):  # gets the entry
     markdowner = Markdown()
+    
+    # if statement required to check if the entry exists
+    if util.get_entry(f"title") == None:
+        return render(request, "encyclopedia/notFound.html")
+    # this is what will render if the entry exists
     return render(request, "encyclopedia/entries.html", {
         "title": markdowner.convert(util.get_entry(f"{title}"))
     })

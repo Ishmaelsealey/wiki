@@ -1,0 +1,9 @@
+{% extends "encyclopedia/layout.html" %}
+{% block title %}
+Does Not Exist
+{% endblock %}
+
+{% block body%}
+   <h1 id="error">ERROR : The entry you are trying to find does not exist.</h1>
+   <h3><a href="{% url 'encyclopedia:index' %}">Return Home</a></h3>
+{% endblock %}
