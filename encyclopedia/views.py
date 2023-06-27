@@ -24,6 +24,8 @@ def entry(request, title):  # gets the entry
 
 class NewEntryForm(forms.Form): # a form to create a new entry
     title = forms.CharField(label = "Title")#change this to a textarea
+    # a workaround. Without the entry variable, the new function does not work, traceback error to 'entry = form.cleaned_data["entry"]'
+    entry = forms.CharField(widget = forms.HiddenInput(), required=False)
 
 def new(request):
     if request.method == "POST":
@@ -37,7 +39,7 @@ def new(request):
             return render(request, "encyclopedia/new.html", {
                 "form": form
             })
-            ##
+            
     return render(request, "encyclopedia/new.html", {
         "form": NewEntryForm()
     })
