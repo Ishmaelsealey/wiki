@@ -15,7 +15,7 @@ def entry(request, title):  # gets the entry
     markdowner = Markdown()
     
     # if statement required to check if the entry exists
-    if util.get_entry(f"title") == None:
+    if util.get_entry(f"{title}") == None:
         return render(request, "encyclopedia/notFound.html")
     # this is what will render if the entry exists
     return render(request, "encyclopedia/entries.html", {
