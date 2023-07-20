@@ -1,0 +1,11 @@
+{% extends layout.html %}
+
+{% block body %}
+
+<ul>
+    {%for item in match_result %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
