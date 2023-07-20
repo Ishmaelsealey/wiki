@@ -44,23 +44,29 @@ def new(request):
         "form": NewEntryForm()
     })
 
-def search(request, query):
+# def search(request):
+#     query = request.GET.get("q")
+#     entries = util.list_entries()
+#     markdowner = Markdown()
 
-    entries = util.list_entries()
-    markdowner = Markdown()
-    print(entries)
+#     for item in entries:
+#         if query == item:
+#             return render(request, "encyclopedia/entries.html", {
+#                 "title": markdowner.convert(util.get_entry(f"{query}"))
+#             })
+#         elif item.__contains__(f"{query}"):
 
-    for item in entries:
-        if query == item:
-            print(query)
-            return render(request, "encyclopedia/entries.html", {
-                "title": markdowner.convert(util.get_entry(f"{query}"))
-            })
-        elif item.__contains__(f"{query}"):
+#             return render(request, "encyclopedia/search.html", {
+#                 "match_result": item
+#             })
 
+def search(request):
+    entryList = util.list_entries()
+    query = request.GET.get("q")
+    matchingResults = []
+    for item in entryList:
+        if item.__contains__(f"{query}"):
+            matchingResults.append(item)
             return render(request, "encyclopedia/search.html", {
-                "match_result": item
+                "match_result": matchingResults
             })
-
-            print(item)
-            return HttpResponse(item)

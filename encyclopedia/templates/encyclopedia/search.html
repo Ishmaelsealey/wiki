@@ -1,9 +1,11 @@
-{% extends layout.html %}
+{% extends "encyclopedia/layout.html" %}
 
 {% block body %}
 
+<h1>Items that match your search</h1>
+
 <ul>
-    {%for item in match_result %}
+    {% for item in match_result %}
     <li>{{ item }}</li>
     {% endfor %}
 </ul>
