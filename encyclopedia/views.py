@@ -44,27 +44,33 @@ def new(request):
         "form": NewEntryForm()
     })
 
-def search(request):
-    query = request.GET.get("q")
-    entryList = util.list_entries()
-    markdowner = Markdown()
+# def search(request):
+#     query = request.GET.get("q")
+#     entryList = util.list_entries()
+#     markdowner = Markdown()
 
-    #This works if entry is exact match!
-    for item in entryList:
-        if query == item:
-            return render(request, "encyclopedia/entries.html", {
-                "title": markdowner.convert(util.get_entry(f"{query}"))
-            })
+#     # This works if entry is exact match!
+#     for item in entryList:
+#         if query == item:
+#             return render(request, "encyclopedia/entries.html", {
+#                 "title": markdowner.convert(util.get_entry(f"{query}"))
+#             })
 
 #This partially works!
 #Returns the first result that matches
-# def search(request):
-#     entryList = util.list_entries()
-#     query = request.GET.get("q")
-#     matchingResults = []
-#     for item in entryList:
-#         if item.__contains__(f"{query}"):
-#             matchingResults.append(item)
-#             return render(request, "encyclopedia/search.html", {
-#                 "match_result": matchingResults
-#             })
+def search(request):
+    entryList = util.list_entries()
+    query = request.GET.get("q")
+    matchingResults = []
+
+    for item in entryList:
+
+        if item.__contains__(f"{query}"):
+
+            matchingResults.append(item)
+
+    return render(request, "encyclopedia/search.html", {
+
+        "match_result": matchingResults
+
+    })
