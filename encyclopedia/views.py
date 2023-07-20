@@ -44,6 +44,18 @@ def new(request):
         "form": NewEntryForm()
     })
 
+import random
+# Get a random entry from the list of entries
+# Go to the path with the entry's title
+
+def randomEntry(request):
+    markdowner = Markdown()
+    allEntries = util.list_entries()
+    chosen = random.choice(allEntries)
+    return render(request, "encyclopedia/entries.html", {
+        "title": markdowner.convert(util.get_entry(f"{chosen}"))
+    })
+
 def search(request):
     query = request.GET.get("q")
     entryList = util.list_entries()
