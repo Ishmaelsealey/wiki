@@ -44,6 +44,15 @@ def new(request):
         "form": NewEntryForm()
     })
 
+# import random
+# Get a random entry from the list of entries
+# Go to the path with the entry's title
+
+# def randomEntry():
+    # allEntries = util.list_entries()
+    # chosen = random.choice(allEntries)
+    # return chosen
+
 def search(request, query):
 
     entries = util.list_entries()
