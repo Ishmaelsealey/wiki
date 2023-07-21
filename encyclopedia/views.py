@@ -91,5 +91,6 @@ def edit(request, title):
             return HttpResponseRedirect(reverse("encyclopedia:index"))
     if request.method == "GET":
         return render(request, "encyclopedia/edit.html", {
-            "form": editEntryForm()
+            "form": editEntryForm(),
+            "title": title
         })

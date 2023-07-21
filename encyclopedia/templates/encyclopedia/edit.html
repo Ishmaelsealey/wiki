@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Edit {{ title }} Entry</h1>
 
-    <form action="/entry/{{ title }}" method="post" style="display: grid; gap: 1rem;">
+    <form action="/edit/{{ title }}" method="post" style="display: grid; gap: 1rem;">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit" class="btn btn-success">
