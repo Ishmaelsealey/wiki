@@ -4,6 +4,8 @@ Does Not Exist
 {% endblock %}
 
 {% block body%}
-   <h1 id="error">ERROR : The entry you are trying to find does not exist.</h1>
-   <h3><a href="{% url 'encyclopedia:index' %}">Return Home</a></h3>
+   <div class="alert alert-danger">
+      <h1>ERROR : The entry you are trying to find does not exist.</h1>
+   </div>
+   <h3 class="alert alert-success"><a href="{% url 'encyclopedia:index' %}" class="link-success">Return Home</a></h3>
 {% endblock %}
