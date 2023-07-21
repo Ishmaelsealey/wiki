@@ -6,14 +6,11 @@
 
 {% block body %}
 <!-- find a way to make the action use the util.save_entry function-->
-    <form action="{% url 'encyclopedia:new' %}" method="post">
+    <form action="{% url 'encyclopedia:new' %}" method="post" style="display: grid; gap: 1rem;">
         {% csrf_token %}
         {{ form }}
         <br>
-        <label for="entry">Entry: </label>
-        <textarea name="entry" id="entry" style="max-height: 400px;" class="mt-3"></textarea>
-        <br>
-        <input type="submit" value="Submit" class="btn btn-success mt-4">
+        <input type="submit" value="Submit" class="btn btn-success">
     </form>
 
 {% endblock %}

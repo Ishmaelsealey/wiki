@@ -1,6 +1,5 @@
 from django.urls import path
-import random
-from . import views, util
+from . import views
 
 app_name = "encyclopedia"
 

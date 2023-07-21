@@ -4,7 +4,7 @@ from markdown2 import Markdown
 from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 def index(request): # Returns a list of entries
     return render(request, "encyclopedia/index.html", {
@@ -23,9 +23,8 @@ def entry(request, title):  # gets the entry
     })
 
 class NewEntryForm(forms.Form): # a form to create a new entry
-    title = forms.CharField(label = "Title")#change this to a textarea
-    # a workaround. Without the entry variable, the new function does not work, traceback error to 'entry = form.cleaned_data["entry"]'
-    entry = forms.CharField(widget = forms.HiddenInput(), required=False)
+    title = forms.CharField(label = "Title")
+    entry = forms.CharField(widget=forms.Textarea, label = "Entry")
 
 def new(request):
     if request.method == "POST":
