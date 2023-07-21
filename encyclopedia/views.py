@@ -13,13 +13,13 @@ def index(request): # Returns a list of entries
 
 def entry(request, title):  # gets the entry
     markdowner = Markdown()
-    
     # if statement required to check if the entry exists
     if util.get_entry(f"{title}") == None:
         return render(request, "encyclopedia/notFound.html")
     # this is what will render if the entry exists
     return render(request, "encyclopedia/entries.html", {
-        "title": markdowner.convert(util.get_entry(f"{title}"))
+        "title": markdowner.convert(util.get_entry(f"{title}")),
+        "entryTitle": title
     })
 
 class NewEntryForm(forms.Form): # a form to create a new entry
@@ -79,3 +79,20 @@ def search(request):
         "match_result": matchingResults
     })
 
+entryBody = util.get_entry("css")
+
+class editEntryForm(forms.Form):
+    entryText = forms.CharField(widget=forms.Textarea, label="Edit Entry", initial=f"{entryBody}")
+
+def edit(request):
+    if request.method == "POST":
+        form = editEntryForm(request.POST)
+        if form.is_valid():
+            entry = form.cleaned_data["entryText"]
+            util.save_entry("css", f"{entry}")
+            return HttpResponseRedirect(reverse("encyclopedia:css"))
+    else:
+
+        return render(request, "encyclopedia/edit.html", {
+            "form": editEntryForm()
+        })
