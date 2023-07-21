@@ -79,20 +79,17 @@ def search(request):
         "match_result": matchingResults
     })
 
-entryBody = util.get_entry("css")
-
-class editEntryForm(forms.Form):
-    entryText = forms.CharField(widget=forms.Textarea, label="Edit Entry", initial=f"{entryBody}")
-
-def edit(request):
+def edit(request, title):
+    entryBody = util.get_entry(f"{title}")
+    class editEntryForm(forms.Form):
+        entryText = forms.CharField(widget=forms.Textarea, label="Edit Entry", initial=f"{entryBody}")
     if request.method == "POST":
         form = editEntryForm(request.POST)
         if form.is_valid():
             entry = form.cleaned_data["entryText"]
-            util.save_entry("css", f"{entry}")
-            return HttpResponseRedirect(reverse("encyclopedia:css"))
-    else:
-
+            util.save_entry(f"{title}", f"{entry}")
+            return HttpResponseRedirect(reverse("encyclopedia:index"))
+    if request.method == "GET":
         return render(request, "encyclopedia/edit.html", {
             "form": editEntryForm()
         })

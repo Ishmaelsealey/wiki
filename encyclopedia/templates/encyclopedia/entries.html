@@ -8,5 +8,5 @@
    <br>
    <h3><a href="{% url 'encyclopedia:index' %}">Return Home</a></h3>
    <br>
-   <h3><a href="{% url 'encyclopedia:edit' %}" name="{{ entryTitle }}">Edit Entry</a></h3>
+   <h3><a href="/edit/{{ entryTitle }}">Edit Entry</a></h3>
 {% endblock %}
