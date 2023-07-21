@@ -4,7 +4,7 @@ from markdown2 import Markdown
 from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-# from django.http import HttpResponse
+from django.http import HttpResponse
 
 def index(request): # Returns a list of entries
     return render(request, "encyclopedia/index.html", {
@@ -32,8 +32,13 @@ def new(request):
         if form.is_valid():
             title = form.cleaned_data["title"]
             entry = form.cleaned_data["entry"]
-            util.save_entry(f"{title}", f"{entry}")
-            return HttpResponseRedirect(reverse("encyclopedia:index"))
+            if util.get_entry(f"{title}") == None:
+                util.save_entry(f"{title}", f"{entry}")
+                return HttpResponseRedirect(reverse("encyclopedia:index"))
+            else:
+                return render(request, "encyclopedia/entryExists.html", {
+                    "title": title
+                })
         else:
             return render(request, "encyclopedia/new.html", {
                 "form": form

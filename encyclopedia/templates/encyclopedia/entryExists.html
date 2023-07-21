@@ -1,0 +1,15 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Entry Exists!
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="alert alert-danger">{{ title }} Entry Already Exists!</h1>
+    <br>
+    <a href="{{ title }}">See entry here</a>
+    <br>
+    <a href="{ url encyclopedia:index}">Return Home</a>
+    
+{% endblock %}
